@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+ 	<style>
+ 		*{
+ 			margin: 0;
+ 			padding: 0;
+ 		}
+ 		html,body,.root{
+ 			height: 100%;
+ 			width: 100%;
+ 			background:#01142A;
+ 		}
+ 	</style>
+</head>
+<body>
+    <div class="root"></div>
+    <script src="../../lib/jquery.js"></script>
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.min.js"></script>
+    <script type="text/babel">
+//  	 var promise = new Promise(function(resolve, reject){
+//  	 	setTimeout(()=>{
+//  	 		$.getJSON("data/data.json",(res)=>{
+//	    	 		if(res.resultCount==0){
+//	    	 			resolve(res.resultList)
+//	    	 		}else{
+//	    	 			reject("error")
+//	    	 		}
+//	    	 	})	
+//  	 	},2000)
+//	    		return promise
+//  	 })
+//  	 promise.then((res)=>{
+//  	 	class New extends React.Component{
+//  	 		constructor(props){
+//  	 			super(props)
+//  	 			this.state = {
+//  	 				data : res
+//  	 			}
+//  	 		}
+//  	 		updata(){
+//  	 			
+//  	 		}
+//  	 	}
+//  	 })
+//  	 
+        $.getJSON("data/data.json",(res)=>{
+            console.log(res)
+            const data  = res.resultList
+          	class New extends React.Component{
+                constructor(props){
+                    super(props)
+					this.state = {
+						data : data
+					}
+//					this.enterObj = {
+//						display:"block"
+//					}
+                }
+                over(e){
+                	console.log(111)
+					this.overObj = {
+//						display:"block"
+					}
+                }
+                enter(e){
+                	console.log(e.Target)
+//              	this.enterObj = {
+//              		display:"none"
+//              	}
+                }
+                render(){
+                	const styleObj = {
+                		width:"100%",
+                		height:"60px",
+                		padding:"5px",
+                		color:"#fff",
+                		border:"1px solid #ccc",
+                		marginTop:"10px",
+                		overflow:"hidden",
+                		fontSize:"12px"
+                	}
+                	const wrap = {
+                		width:"50%",
+                		height:"100%",
+                		float:"right",
+                	}
+                	const dataList = this.state.data.map((val,index)=>{
+                		if(index>4){
+                			return false
+                		}else{
+                			return <div  onMouseOver={(e)=>this.over(e)} onMouseEnter={(e)=>this.enter(e)} style={styleObj} key={index}>{val.abstractZh}</div>
+                		} 
+                		
+                	})
+                	console.log(dataList)
+                    return (
+                    	<div style = {wrap}>
+                    		{dataList}
+                    	</div>
+                    )
+                   }
+           }
+           ReactDOM.render(
+           	<New />,
+           	document.querySelector(".root")
+           )
+         })
+    </script>
+</body>
+</html>
